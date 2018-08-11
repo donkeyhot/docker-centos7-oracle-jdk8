@@ -1,14 +1,5 @@
 FROM centos:7
 MAINTAINER "Vadim Isaev" <vadim.o.isaev@gmail.com>
-
-WORKDIR /tmp/
-
-COPY download-and-install-oracle-jdk.sh .
-RUN sh download-and-install-oracle-jdk.sh
-RUN rm download-and-install-oracle-jdk.sh
-
+RUN curl -b "oraclelicense=accept-securebackup-cookie" -L -C - -O http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.rpm; yum localinstall -y jdk-8u181-linux-x64.rpm; rm -f jdk-8u181-linux-x64.rpm
 COPY oracle-jdk.sh /etc/profile.d/
-
-WORKDIR /
-
 CMD java -version
